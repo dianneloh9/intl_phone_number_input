@@ -1,13 +1,14 @@
 import 'package:intl_phone_number_input/src/utils/phone_number.dart';
-import 'package:libphonenumber_plugin/libphonenumber_plugin.dart' as p;
+import 'package:libphonenumber/libphonenumber.dart' as p;
 
-/// A wrapper class [PhoneNumberUtil] that basically switch between plugin available for `Web` or `Android or IOS` and `Other platforms` when available.
+/// A wrapper class [PhoneNumberUtil] that calls libphonenumber methods
 class PhoneNumberUtil {
   /// Accepts [phoneNumber] and [isoCode]
   /// Returns [Future<String>]
   static Future<String?> getNameForNumber(
       {required String phoneNumber, required String isoCode}) async {
-    return p.PhoneNumberUtil.getNameForNumber(phoneNumber, isoCode);
+    return p.PhoneNumberUtil.getNameForNumber(
+        phoneNumber: phoneNumber, isoCode: isoCode);
   }
 
   /// [isValidNumber] checks if a [phoneNumber] is valid.
@@ -18,7 +19,8 @@ class PhoneNumberUtil {
     if (phoneNumber.length < 2) {
       return false;
     }
-    return p.PhoneNumberUtil.isValidPhoneNumber(phoneNumber, isoCode);
+    return p.PhoneNumberUtil.isValidPhoneNumber(
+        phoneNumber: phoneNumber, isoCode: isoCode);
   }
 
   /// [normalizePhoneNumber] normalizes a string of characters representing a phone number
@@ -26,14 +28,16 @@ class PhoneNumberUtil {
   /// Returns [Future<String>]
   static Future<String?> normalizePhoneNumber(
       {required String phoneNumber, required String isoCode}) async {
-    return p.PhoneNumberUtil.normalizePhoneNumber(phoneNumber, isoCode);
+    return p.PhoneNumberUtil.normalizePhoneNumber(
+        phoneNumber: phoneNumber, isoCode: isoCode);
   }
 
   /// Accepts [phoneNumber] and [isoCode]
   /// Returns [Future<RegionInfo>] of all information available about the [phoneNumber]
   static Future<RegionInfo> getRegionInfo(
       {required String phoneNumber, required String isoCode}) async {
-    var response = await p.PhoneNumberUtil.getRegionInfo(phoneNumber, isoCode);
+    var response = await p.PhoneNumberUtil.getRegionInfo(
+        phoneNumber: phoneNumber, isoCode: isoCode);
 
     return RegionInfo(
         regionPrefix: response.regionPrefix,
@@ -46,7 +50,8 @@ class PhoneNumberUtil {
   static Future<PhoneNumberType> getNumberType(
       {required String phoneNumber, required String isoCode}) async {
     final dynamic type =
-        await p.PhoneNumberUtil.getNumberType(phoneNumber, isoCode);
+        await p.PhoneNumberUtil.getNumberType(
+        phoneNumber: phoneNumber, isoCode: isoCode);
 
     return PhoneNumberTypeUtil.getType(type.index);
   }
@@ -56,7 +61,8 @@ class PhoneNumberUtil {
   /// Returns [Future<String>]
   static Future<String?> formatAsYouType(
       {required String phoneNumber, required String isoCode}) async {
-    return p.PhoneNumberUtil.formatAsYouType(phoneNumber, isoCode);
+    return p.PhoneNumberUtil.formatAsYouType(
+        phoneNumber: phoneNumber, isoCode: isoCode);
   }
 }
 
